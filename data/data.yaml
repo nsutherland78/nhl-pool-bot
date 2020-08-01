@@ -1,0 +1,67 @@
+---
+roundrobin:
+  east:
+    match1:
+      - PHI
+      - BOS
+    match2:
+      - WSH
+      - TBL
+    match3:
+      - TBL
+      - BOS
+    match4:
+      - WSH
+      - PHI
+    match5:
+      - BOS
+      - WSH
+    match6:
+      - PHI
+      - TBL
+  west:
+    match1:
+      - STL
+      - COL
+    match2:
+      - DAL
+      - VGK
+    match3:
+      - COL
+      - DAL
+    match4:
+      - VGK
+      - STL
+    match5:
+      - VGK
+      - COL
+    match6:
+      - DAL
+      - STL
+best_of_five:
+  east:
+    match1:
+      - PIT
+      - MTL
+    match2:
+      - CAR
+      - NYR
+    match3:
+      - NYI
+      - FLA
+    match4:
+      - TOR
+      - CBJ
+  west:
+    match1:
+      - EDM
+      - CHI
+    match2:
+      - NSH
+      - ARI
+    match3:
+      - VAN
+      - MIN
+    match4:
+      - CGY
+      - WPG
