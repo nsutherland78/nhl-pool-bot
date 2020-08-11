@@ -1,0 +1,26 @@
+best_of_five:
+  east:
+    match1: PIT 3
+    match2: NYR 5
+    match3: NYI 5
+    match4: CBJ 5
+  west:
+    match1: CHI 4
+    match2: NSH 5
+    match3: VAN 5
+    match4: CGY 4
+roundrobin:
+  east:
+    match1: PHI
+    match2: TBL
+    match3: TBL
+    match4: WSH
+    match5: WSH
+    match6: PHI
+  west:
+    match1: COL
+    match2: DAL
+    match3: COL
+    match4: STL
+    match5: COL
+    match6: STL

@@ -34,7 +34,7 @@ def importdata():
 
 
 def make_picks(data):
-    print("Making random pick selection...")
+    print("Making random pick selections...")
     # CREATE PICKS STRUCTURE
     picks = {'roundrobin':{'east':{'match1':'','match2':'','match3':'', 'match4':'', 'match5':'', 'match6':''},'west':{'match1':'','match2':'','match3':'', 'match4':'', 'match5':'', 'match6':''}},'best_of_five':{'east':{'match1':'','match2':'','match3':'', 'match4':''},'west':{'match1':'','match2':'','match3':'', 'match4':''}}}
     # EAST ROUND ROBIN PICKS
@@ -52,15 +52,15 @@ def make_picks(data):
     picks['roundrobin']['west']['match5'] = random.choice(data['roundrobin']['west']['match5'])
     picks['roundrobin']['west']['match6'] = random.choice(data['roundrobin']['west']['match6'])
     # EAST BEST OF FIVE PICKS
-    picks['best_of_five']['east']['match1'] = random.choice(data['best_of_five']['east']['match1'])
-    picks['best_of_five']['east']['match2'] = random.choice(data['best_of_five']['east']['match2'])
-    picks['best_of_five']['east']['match3'] = random.choice(data['best_of_five']['east']['match3'])
-    picks['best_of_five']['east']['match4'] = random.choice(data['best_of_five']['east']['match4'])
+    picks['best_of_five']['east']['match1'] = random.choice(data['best_of_five']['east']['match1']) + ' ' + str(random.randint(3, 5))
+    picks['best_of_five']['east']['match2'] = random.choice(data['best_of_five']['east']['match2']) + ' ' + str(random.randint(3, 5))
+    picks['best_of_five']['east']['match3'] = random.choice(data['best_of_five']['east']['match3']) + ' ' + str(random.randint(3, 5))
+    picks['best_of_five']['east']['match4'] = random.choice(data['best_of_five']['east']['match4']) + ' ' + str(random.randint(3, 5))
     # WEST BEST OF FIVE PICKS
-    picks['best_of_five']['west']['match1'] = random.choice(data['best_of_five']['west']['match1'])
-    picks['best_of_five']['west']['match2'] = random.choice(data['best_of_five']['west']['match2'])
-    picks['best_of_five']['west']['match3'] = random.choice(data['best_of_five']['west']['match3'])
-    picks['best_of_five']['west']['match4'] = random.choice(data['best_of_five']['west']['match4'])
+    picks['best_of_five']['west']['match1'] = random.choice(data['best_of_five']['west']['match1']) + ' ' + str(random.randint(3, 5))
+    picks['best_of_five']['west']['match2'] = random.choice(data['best_of_five']['west']['match2']) + ' ' + str(random.randint(3, 5))
+    picks['best_of_five']['west']['match3'] = random.choice(data['best_of_five']['west']['match3']) + ' ' + str(random.randint(3, 5))
+    picks['best_of_five']['west']['match4'] = random.choice(data['best_of_five']['west']['match4']) + ' ' + str(random.randint(3, 5))
     print("Picks complete.") 
     return picks
 
