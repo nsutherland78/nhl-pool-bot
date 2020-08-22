@@ -67,7 +67,6 @@ def make_picks(data, picktype):
         scwinner = scoutput.split(' ')
         picks['stanleycupwinner'] = scwinner[0]
     elif picktype == 2:
-        # scwinner = import_scwinner()
         # CREATE PICKS STRUCTURE
         picks = {'secondround':{'east':{'match1':'','match2':''},'west':{'match1':'','match2':''}}}
         # EASTERN CONFERENCE PICKS
@@ -75,13 +74,7 @@ def make_picks(data, picktype):
         picks['secondround']['east']['match2'] = random.choice(data['secondround']['east']['match2']) + ' ' + str(random.randint(4, 7))
         # WESTERN CONFERENCE PICKS
         picks['secondround']['west']['match1'] = random.choice(data['secondround']['west']['match1']) + ' ' + str(random.randint(4, 7))
-        picks['secondround']['west']['match2'] = random.choice(data['secondround']['west']['match2']) + ' ' + str(random.randint(4, 7))
-        # for teams in data['secondround']['east']['match1']:
-        #     if teams == scwinner:
-        #         print(picks['secondround']['east']['match1'])
-        #         picks['secondround']['east']['match1'] = random.choice(data['secondround']['east']['match1']) + ' ' + str(random.randint(4, 7))
-        #         print(picks['secondround']['east']['match1'])
-                
+        picks['secondround']['west']['match2'] = random.choice(data['secondround']['west']['match2']) + ' ' + str(random.randint(4, 7)) 
     elif picktype == 3:
         # CREATE PICKS STRUCTURE
         picks = {'thirdround':{'east':{'match1':''},'west':{'match1':''}}}
@@ -102,17 +95,8 @@ def make_picks(data, picktype):
 def exportdata(picks, picksfile):
     print("Beginning export of data to picks.yaml...")
     with open('{}'.format(picksfile), 'w') as pf:
-        scdata = yaml.load(pf, Loader=yaml.FullLoader)
+        yaml.dump(picks, pf)
     print("Export to {} file complete.".format(picksfile))
-
-
-def import_scwinner():
-    scfile = input("Provide path of picks file from first round: ")
-    print("Importing Stanley Cup choice from first round.")
-    with open('{}'.format(scfile), 'w') as sf:
-        yaml.dump(data, sf)
-    scwinner = data['stanleycupwinner']
-    return scwinner
 
 
 def main():
