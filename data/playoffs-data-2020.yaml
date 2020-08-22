@@ -1,0 +1,57 @@
+---
+firstround:
+  east:
+    match1:
+      - PHI
+      - MTL
+    match2:
+      - TBL
+      - CBJ
+    match3:
+      - WSH
+      - NYI
+    match4:
+      - BOS
+      - CAR
+  west:
+    match1:
+      - VGK
+      - CHI
+    match2:
+      - COL
+      - ARI
+    match3:
+      - DAL
+      - CGY
+    match4:
+      - STL
+      - VAN
+secondround:
+  east:
+    match1:
+      - PHI
+      - NYI
+    match2:
+      - TBL
+      - BOS
+  west:
+    match1:
+      - VGK
+      - VAN
+    match2:
+      - COL
+      - DAL
+thirdround:
+  east:
+    match1:
+      -
+      -
+  west:
+    match1:
+      -
+      -
+fourthround:
+  match:
+    -
+    -
+stanleycupwinner:
