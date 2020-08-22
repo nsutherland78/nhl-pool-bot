@@ -1,0 +1,12 @@
+firstround:
+  east:
+    match1: MTL 6
+    match2: TBL 5
+    match3: NYI 6
+    match4: BOS 6
+  west:
+    match1: CHI 5
+    match2: COL 7
+    match3: DAL 5
+    match4: STL 4
+stanleycupwinner: TBL

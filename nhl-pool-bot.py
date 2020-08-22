@@ -10,14 +10,24 @@ from argparse import ArgumentParser
 
 def create_parser():
     parser = ArgumentParser(
-        description='Generates insults'
+        description='Auto generates hockey picks based on data provided.'
     )
     parser.add_argument(
-        '-m',
-        '--multiply',
+        'datafile',
+        type=str,
+        help='Tells program which data file to generate the picks from.'
+    )
+    parser.add_argument(
+        'picksfile',
+        type=str,
+        help='Tells program which file to output the picks from.'
+    )
+    parser.add_argument(
+        '-p',
+        '--picktype',
         type=int,
-        choices=[2, 3],
-        help='multiplies the insult'
+        choices=[1, 2, 3, 4],
+        help='Selects which type of pick to perform, 1st to 4th round, and Stanley Cup Winner, if not specified, it will pick all.'
     )
     return parser.parse_args()
 
@@ -25,55 +35,93 @@ def create_parser():
 ARGS = create_parser()
 
 
-def importdata():
-    print("Importing data from data.yaml...")
-    with open('data/data.yaml', 'r') as datafile:
-        data = yaml.load(datafile, Loader=yaml.FullLoader)
+def importdata(datafile):
+    print("Importing data from yaml file provided...")
+    with open('{}'.format(datafile), 'r') as df:
+        data = yaml.load(df, Loader=yaml.FullLoader)
     print("Import complete.")
     return data
 
 
-def make_picks(data):
+def make_picks(data, picktype):
     print("Making random pick selections...")
-    # CREATE PICKS STRUCTURE
-    picks = {'roundrobin':{'east':{'match1':'','match2':'','match3':'', 'match4':'', 'match5':'', 'match6':''},'west':{'match1':'','match2':'','match3':'', 'match4':'', 'match5':'', 'match6':''}},'best_of_five':{'east':{'match1':'','match2':'','match3':'', 'match4':''},'west':{'match1':'','match2':'','match3':'', 'match4':''}}}
-    # EAST ROUND ROBIN PICKS
-    picks['roundrobin']['east']['match1'] = random.choice(data['roundrobin']['east']['match1'])
-    picks['roundrobin']['east']['match2'] = random.choice(data['roundrobin']['east']['match2'])
-    picks['roundrobin']['east']['match3'] = random.choice(data['roundrobin']['east']['match3'])
-    picks['roundrobin']['east']['match4'] = random.choice(data['roundrobin']['east']['match4'])
-    picks['roundrobin']['east']['match5'] = random.choice(data['roundrobin']['east']['match5'])
-    picks['roundrobin']['east']['match6'] = random.choice(data['roundrobin']['east']['match6'])
-    # WEST ROUNDROBIN PICKS
-    picks['roundrobin']['west']['match1'] = random.choice(data['roundrobin']['west']['match1'])
-    picks['roundrobin']['west']['match2'] = random.choice(data['roundrobin']['west']['match2'])
-    picks['roundrobin']['west']['match3'] = random.choice(data['roundrobin']['west']['match3'])
-    picks['roundrobin']['west']['match4'] = random.choice(data['roundrobin']['west']['match4'])
-    picks['roundrobin']['west']['match5'] = random.choice(data['roundrobin']['west']['match5'])
-    picks['roundrobin']['west']['match6'] = random.choice(data['roundrobin']['west']['match6'])
-    # EAST BEST OF FIVE PICKS
-    picks['best_of_five']['east']['match1'] = random.choice(data['best_of_five']['east']['match1']) + ' ' + str(random.randint(3, 5))
-    picks['best_of_five']['east']['match2'] = random.choice(data['best_of_five']['east']['match2']) + ' ' + str(random.randint(3, 5))
-    picks['best_of_five']['east']['match3'] = random.choice(data['best_of_five']['east']['match3']) + ' ' + str(random.randint(3, 5))
-    picks['best_of_five']['east']['match4'] = random.choice(data['best_of_five']['east']['match4']) + ' ' + str(random.randint(3, 5))
-    # WEST BEST OF FIVE PICKS
-    picks['best_of_five']['west']['match1'] = random.choice(data['best_of_five']['west']['match1']) + ' ' + str(random.randint(3, 5))
-    picks['best_of_five']['west']['match2'] = random.choice(data['best_of_five']['west']['match2']) + ' ' + str(random.randint(3, 5))
-    picks['best_of_five']['west']['match3'] = random.choice(data['best_of_five']['west']['match3']) + ' ' + str(random.randint(3, 5))
-    picks['best_of_five']['west']['match4'] = random.choice(data['best_of_five']['west']['match4']) + ' ' + str(random.randint(3, 5))
-    print("Picks complete.") 
+    if picktype == 1:
+        # CREATE PICKS STRUCTURE
+        picks = {'firstround':{'east':{'match1':'','match2':'','match3':'', 'match4':''},'west':{'match1':'','match2':'','match3':'', 'match4':''}}, 'stanleycupwinner':''}
+        # EASTERN CONFERENCE PICKS
+        picks['firstround']['east']['match1'] = random.choice(data['firstround']['east']['match1']) + ' ' + str(random.randint(4, 7))
+        picks['firstround']['east']['match2'] = random.choice(data['firstround']['east']['match2']) + ' ' + str(random.randint(4, 7))
+        picks['firstround']['east']['match3'] = random.choice(data['firstround']['east']['match3']) + ' ' + str(random.randint(4, 7))
+        picks['firstround']['east']['match4'] = random.choice(data['firstround']['east']['match4']) + ' ' + str(random.randint(4, 7))
+        # WESTERN CONFERENCE PICK
+        picks['firstround']['west']['match1'] = random.choice(data['firstround']['west']['match1']) + ' ' + str(random.randint(4, 7))
+        picks['firstround']['west']['match2'] = random.choice(data['firstround']['west']['match2']) + ' ' + str(random.randint(4, 7))
+        picks['firstround']['west']['match3'] = random.choice(data['firstround']['west']['match3']) + ' ' + str(random.randint(4, 7))
+        picks['firstround']['west']['match4'] = random.choice(data['firstround']['west']['match4']) + ' ' + str(random.randint(4, 7))
+        sclist = []
+        for pick in picks['firstround']['east']:
+            sclist.append(picks['firstround']['east']['{}'.format(pick)])
+        for pick in picks['firstround']['west']:
+            sclist.append(picks['firstround']['west']['{}'.format(pick)])
+        scoutput = random.choice(sclist)
+        scwinner = scoutput.split(' ')
+        picks['stanleycupwinner'] = scwinner[0]
+    elif picktype == 2:
+        # scwinner = import_scwinner()
+        # CREATE PICKS STRUCTURE
+        picks = {'secondround':{'east':{'match1':'','match2':''},'west':{'match1':'','match2':''}}}
+        # EASTERN CONFERENCE PICKS
+        picks['secondround']['east']['match1'] = random.choice(data['secondround']['east']['match1']) + ' ' + str(random.randint(4, 7))
+        picks['secondround']['east']['match2'] = random.choice(data['secondround']['east']['match2']) + ' ' + str(random.randint(4, 7))
+        # WESTERN CONFERENCE PICKS
+        picks['secondround']['west']['match1'] = random.choice(data['secondround']['west']['match1']) + ' ' + str(random.randint(4, 7))
+        picks['secondround']['west']['match2'] = random.choice(data['secondround']['west']['match2']) + ' ' + str(random.randint(4, 7))
+        # for teams in data['secondround']['east']['match1']:
+        #     if teams == scwinner:
+        #         print(picks['secondround']['east']['match1'])
+        #         picks['secondround']['east']['match1'] = random.choice(data['secondround']['east']['match1']) + ' ' + str(random.randint(4, 7))
+        #         print(picks['secondround']['east']['match1'])
+                
+    elif picktype == 3:
+        # CREATE PICKS STRUCTURE
+        picks = {'thirdround':{'east':{'match1':''},'west':{'match1':''}}}
+        # EASTERN CONFERENCE PICKS
+        picks['thirdround']['east']['match1'] = random.choice(data['thirdround']['east']['match1']) + ' ' + str(random.randint(4, 7))
+        # WESTERN CONFERENCE PICKS
+        picks['thirdround']['west']['match1'] = random.choice(data['thirdround']['west']['match1']) + ' ' + str(random.randint(4, 7))
+    elif picktype == 4:
+        # CREATE PICKS STRUCTURE
+        picks = {'fourthround':''}
+        # FINAL PICK
+        picks['fourthround'] = random.choice(data['fourthround']) + ' ' + str(random.randint(4, 7))
+    else:
+        print("No legitimate picktype was provided.  How did you get here?")
     return picks
 
-def exportdata(picks):
+
+def exportdata(picks, picksfile):
     print("Beginning export of data to picks.yaml...")
-    with open('data/picks.yaml', 'w') as picksfile:
-        yaml.dump(picks, picksfile)
-    print("Export to picks.yaml file complete.")
+    with open('{}'.format(picksfile), 'w') as pf:
+        scdata = yaml.load(pf, Loader=yaml.FullLoader)
+    print("Export to {} file complete.".format(picksfile))
+
+
+def import_scwinner():
+    scfile = input("Provide path of picks file from first round: ")
+    print("Importing Stanley Cup choice from first round.")
+    with open('{}'.format(scfile), 'w') as sf:
+        yaml.dump(data, sf)
+    scwinner = data['stanleycupwinner']
+    return scwinner
+
 
 def main():
-    data = importdata()
-    picks = make_picks(data)
-    exportdata(picks)
+    datafile = ARGS.datafile
+    picksfile = ARGS.picksfile
+    picktype = ARGS.picktype
+    data = importdata(datafile)
+    picks = make_picks(data, picktype)
+    exportdata(picks, picksfile)
 
 
 if __name__ == '__main__':
