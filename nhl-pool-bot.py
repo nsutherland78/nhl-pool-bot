@@ -86,7 +86,7 @@ def make_picks(data, picktype):
         # CREATE PICKS STRUCTURE
         picks = {'fourthround':''}
         # FINAL PICK
-        picks['fourthround'] = random.choice(data['fourthround']) + ' ' + str(random.randint(4, 7))
+        picks['fourthround'] = random.choice(data['fourthround']['match']) + ' ' + str(random.randint(4, 7))
     else:
         print("No legitimate picktype was provided.  How did you get here?")
     return picks

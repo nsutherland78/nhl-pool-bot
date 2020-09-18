@@ -52,6 +52,6 @@ thirdround:
       - DAL
 fourthround:
   match:
-    -
-    -
+    - TBL
+    - DAL
 stanleycupwinner:
