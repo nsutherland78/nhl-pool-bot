@@ -44,12 +44,12 @@ secondround:
 thirdround:
   east:
     match1:
-      -
-      -
+      - TBL
+      - NYI
   west:
     match1:
-      -
-      -
+      - VGK
+      - DAL
 fourthround:
   match:
     -
